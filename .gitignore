@@ -1,0 +1,25 @@
+# Node modules (for both client and server)
+server/node_modules/
+client/node_modules/
+
+# Environment variables
+.env
+
+# Build directories (if applicable)
+build/
+dist/
+
+# Log files
+logs/
+*.log
+
+# Temporary files
+tmp/
+temp/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Optional: If you have a client folder with a create-react-app setup:
+client/build/
