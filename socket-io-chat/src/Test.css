@@ -1,0 +1,46 @@
+.app-container {
+    width: 300px;
+    height: 400px;
+    margin: 10px auto;
+}
+.messages-container {
+    margin-bottom: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.messages-container p {
+    background-color: gold;
+}
+.app-container form input {
+    padding: 10px 5px;
+    outline: none;
+    font-size: 16px;
+    border-radius: 10px;
+}
+
+.messages {
+    list-style-type: none; 
+    padding: 0;
+    margin: 0;
+}
+
+.messages li {
+    padding: 0;
+    margin: 0;
+    font-size: 16px;
+}
+
+.form {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.form input {
+    width: 220px;
+}
+
+.form button {
+    width: 60px;
+}
