@@ -1,8 +1,10 @@
 const mongoose = require("mongoose");
 
 const connect = () => {
+  console.log(process.env.chat_MONGO_URI);
+
   mongoose
-    .connect("mongodb://localhost:27017/chat")
+    .connect(process.env.chat_MONGO_URI)
     .then(() => console.log("Connected to chat successfully"))
     .catch((err) => console.log("There was an error: ", err));
 };

@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { MessageType } from "../components/Chat";
-
+import { BASE_URL } from "../constants";
 
 const useMessages = () => {
     const [messageData, setMessageData] = useState<MessageType | MessageType[] | null>(null);
 
     const saveMessage = async (message: MessageType) => {
         try {
-            const response = await fetch("http://localhost:5000/api/messages", {
+            const response = await fetch(`${BASE_URL}/api/messages`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -25,7 +25,7 @@ const useMessages = () => {
 
     const getMessages = async (user1: string, user2: string) => {
         try {
-            const response = await fetch("http://localhost:5000/api/messages/" + user1 + "/" + user2);
+            const response = await fetch(`${BASE_URL}/api/messages/${user1}/${user2}`);
             const result = await response.json();
             setMessageData(result);
         } catch (error) {
@@ -36,7 +36,7 @@ const useMessages = () => {
     }
 
     const updateMessage = async (messageId: string, message: MessageType) => {
-        const response = await fetch("http://localhost:5000/api/messages/" + messageId, {
+        const response = await fetch(`${BASE_URL}/api/messages/${messageId}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"

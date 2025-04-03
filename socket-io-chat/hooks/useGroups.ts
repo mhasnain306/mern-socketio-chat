@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { BASE_URL } from "../constants";
 
 export interface GroupType {
     _id?: string;
@@ -9,7 +10,7 @@ const useGroups = () => {
     const [groupData, setGroupData] = useState<GroupType | null>(null);
     const saveGroup = async (groupInput: GroupType) => {
         try {
-            const response = await fetch("http://localhost:5000/api/groups", {
+            const response = await fetch(`${BASE_URL}/api/groups`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -25,7 +26,7 @@ const useGroups = () => {
     }
 
     const getGroups = async () => {
-        const response = await fetch("http://localhost:5000/api/groups");
+        const response = await fetch(`${BASE_URL}/api/groups`);
         const groups = await response.json();
         return groups;
     }

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { BASE_URL } from "../constants";
 
 interface InteractedUser {
     name: string;
@@ -25,7 +26,7 @@ const useUsers = () => {
         try {
             console.log(user);
 
-            const response = await fetch("http://localhost:5000/api/users", {
+            const response = await fetch(`${BASE_URL}/api/users`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -57,7 +58,7 @@ const useUsers = () => {
     const signIn = async (user: UserData) => {
         setLoading(true);
         try {
-            const response = await fetch("http://localhost:5000/api/auth", {
+            const response = await fetch(`${BASE_URL}/api/auth`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -89,7 +90,7 @@ const useUsers = () => {
     const getUsers = async () => {
         setLoading(true);
         try {
-            const result = await fetch("http://localhost:5000/api/users");
+            const result = await fetch(`${BASE_URL}/api/users`);
             const users = await result.json();
 
             setData(users);
@@ -104,7 +105,7 @@ const useUsers = () => {
     }
 
     const saveUserInteraction = async (user: UserData) => {
-        const response = await fetch("http://localhost:5000/api/users/" + user._id);
+        const response = await fetch(`${BASE_URL}/api/users/${user._id}`);
         const result = await response.json();
         let isInteractedUser = false;
         result.interactedWith.some((iUser: InteractedUser) => {
@@ -122,7 +123,7 @@ const useUsers = () => {
             }
             console.log("Update data for interacted user", updateData)
             try {
-                const response = await fetch("http://localhost:5000/api/users/" + user._id, {
+                const response = await fetch(`${BASE_URL}/api/users/${user._id}`, {
                     method: "PUT",
                     headers: {
                         "Content-Type": "application/json"
@@ -140,7 +141,7 @@ const useUsers = () => {
 
     const getOneUser = async (userId: string) => {
         try {
-            const response = await fetch("http://localhost:5000/api/users/" + userId);
+            const response = await fetch(`${BASE_URL}/api/users/${userId}`);
             const user = await response.json();
             return user;
         } catch (error) {
