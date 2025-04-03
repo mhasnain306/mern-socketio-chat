@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import React from "react";
 import useUsers, { UserData } from "../hooks/useUsers";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -13,7 +14,7 @@ const AuthForm = () => {
     if (localStorage.getItem("chatAppToken")) {
       navigate("/chat");
     }
-    if (data) {
+    if (data && localStorage.getItem("chatAppToken")) {
       navigate("/chat");
     }
   });

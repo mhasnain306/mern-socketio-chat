@@ -32,6 +32,7 @@ router.post("/", async (req, res) => {
   const payload = {
     _id: user._id,
     name: user.name,
+    email: user.email,
   };
 
   const token = jwt.sign(payload, "secretKey");

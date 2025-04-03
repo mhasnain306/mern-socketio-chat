@@ -24,13 +24,13 @@ const userSchema = new mongoose.Schema({
     required: true,
     minlength: 5,
   },
-  interactedWith: new mongoose.Schema({
-    users: [
-      {
+  interactedWith: {
+    type: [
+      new mongoose.Schema({
         name: {
           type: String,
           required: true,
-          minlength: 5,
+          minlength: 3,
           maxlength: 255,
           trim: true,
         },
@@ -38,11 +38,13 @@ const userSchema = new mongoose.Schema({
           type: mongoose.Schema.Types.ObjectId,
           required: true,
         },
-      },
+      }),
     ],
-  }),
+    default: [],
+  },
 });
 
 const User = mongoose.model("User", userSchema);
 
+module.exports.userSchema = userSchema;
 module.exports = User;

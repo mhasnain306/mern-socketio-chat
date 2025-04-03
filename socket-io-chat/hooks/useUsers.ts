@@ -1,15 +1,25 @@
 import { useState } from "react";
 
+interface InteractedUser {
+    name: string;
+    _id: string;
+}
 export interface UserData {
-    _id: string
-    name: string,
+    _id: string;
+    name: string;
     email: string;
-    password: string
+    password?: string;
+    interactedWith?: InteractedUser[];
+    interactedUserName: string;
+    interactedUserId: string
 }
 const useUsers = () => {
     const [data, setData] = useState<UserData[] | null>(null);
+    const [isUserInteractionUpdated, setUserInteractionUpdated] = useState(false);
     const [isLoading, setLoading] = useState(false);
     const [error, setError] = useState("");
+    const [userData, setUserData] = useState<UserData>();
+
     const createUser = async (user: UserData) => {
         setLoading(true);
         try {
@@ -92,7 +102,52 @@ const useUsers = () => {
             }
         }
     }
-    return { createUser, signIn, getUsers, data, isLoading, error }
+
+    const saveUserInteraction = async (user: UserData) => {
+        const response = await fetch("http://localhost:5000/api/users/" + user._id);
+        const result = await response.json();
+        let isInteractedUser = false;
+        result.interactedWith.some((iUser: InteractedUser) => {
+            if (iUser._id === user.interactedUserId) {
+                isInteractedUser = true;
+                return true
+            }
+        });
+        if (!isInteractedUser) {
+            const updateData = {
+                name: user.name,
+                email: user.email,
+                interactedUserName: user.interactedUserName,
+                interactedUserId: user.interactedUserId
+            }
+            console.log("Update data for interacted user", updateData)
+            try {
+                const response = await fetch("http://localhost:5000/api/users/" + user._id, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(updateData)
+                })
+
+                const result = await response.json();
+                setUserInteractionUpdated(true);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    }
+
+    const getOneUser = async (userId: string) => {
+        try {
+            const response = await fetch("http://localhost:5000/api/users/" + userId);
+            const user = await response.json();
+            return user;
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    return { createUser, signIn, getUsers, getOneUser, userData, saveUserInteraction, data, isUserInteractionUpdated, isLoading, error }
 }
 
 export default useUsers;
