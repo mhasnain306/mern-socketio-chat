@@ -2,7 +2,6 @@ import { FormEvent, useEffect, useRef, useState } from "react";
 import useGroupChat from "../hooks/useGroupChat";
 import { GroupType } from "../hooks/useGroups";
 import { UserData } from "../hooks/useUsers";
-import React from "react";
 
 interface Props {
   group: GroupType | null;

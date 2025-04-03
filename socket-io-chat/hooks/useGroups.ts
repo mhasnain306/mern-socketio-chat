@@ -33,7 +33,7 @@ const useGroups = () => {
 
     const getUserGroups = async (userId: string) => {
         let userGroups: GroupType[] = [];
-        const groupsData = await getGroups();
+        const groupsData: GroupType[] = await getGroups();
         groupsData.map(group => {
             group.users.map(uId => {
 

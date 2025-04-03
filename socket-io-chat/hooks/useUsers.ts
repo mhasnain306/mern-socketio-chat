@@ -19,7 +19,7 @@ const useUsers = () => {
     const [isUserInteractionUpdated, setUserInteractionUpdated] = useState(false);
     const [isLoading, setLoading] = useState(false);
     const [error, setError] = useState("");
-    const [userData, setUserData] = useState<UserData>();
+    const [userData] = useState<UserData>();
 
     const createUser = async (user: UserData) => {
         setLoading(true);
@@ -131,7 +131,7 @@ const useUsers = () => {
                     body: JSON.stringify(updateData)
                 })
 
-                const result = await response.json();
+                await response.json();
                 setUserInteractionUpdated(true);
             } catch (error) {
                 console.log(error);

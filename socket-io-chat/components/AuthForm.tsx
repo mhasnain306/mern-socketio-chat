@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
-import React from "react";
-import useUsers, { UserData } from "../hooks/useUsers";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import useUsers, { UserData } from "../hooks/useUsers";
 
 const AuthForm = () => {
   const [isSignUpMode, setSignUpMode] = useState(false);
-  const { createUser, signIn, data, isLoading, error } =
-    useUsers();
+  const { createUser, signIn, data, isLoading } = useUsers();
   const { register, handleSubmit } = useForm<UserData>();
   const navigate = useNavigate();
   useEffect(() => {

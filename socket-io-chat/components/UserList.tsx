@@ -1,4 +1,3 @@
-import React from "react";
 import { UserData } from "../hooks/useUsers";
 
 interface Props {

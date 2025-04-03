@@ -1,19 +1,17 @@
-import React from "react";
 import { jwtDecode } from "jwt-decode";
+import _, { unionBy } from "lodash";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import useUsers, { UserData } from "../hooks/useUsers";
-import _ from "lodash";
-import ChatBox from "./ChatBox";
-import socket from "../src/socket";
+import { GroupType } from "../hooks/useGroups";
 import useMessages from "../hooks/useMessages";
+import useUsers, { UserData } from "../hooks/useUsers";
+import socket from "../src/socket";
+import ActiveChatList from "./ActiveChatList";
+import ChatBox from "./ChatBox";
+import GroupChatBox from "./GroupChatBox";
 import GroupCreationForm from "./GroupCreationForm";
-import { unionBy } from "lodash";
 import Navbar from "./Navbar";
 import UserList from "./UserList";
-import ActiveChatList from "./ActiveChatList";
-import { GroupType } from "../hooks/useGroups";
-import GroupChatBox from "./GroupChatBox";
 
 export interface MessageType {
   _id?: string;
@@ -27,8 +25,7 @@ export interface MessageType {
 const Chat = () => {
   const navigate = useNavigate();
   const [messages, setMessages] = useState<MessageType[]>([]);
-  const [receivedMessage, setReceivedMessage] =
-    useState<MessageType | null>(null);
+  const [receivedMessage] = useState<MessageType | null>(null);
   const [loggedInUser, setloggedInUser] = useState<UserData>(
     {} as UserData
   );

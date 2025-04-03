@@ -9,7 +9,7 @@ const useGetOneGroup = (groupId: string) => {
         console.log("Hello world");
         fetch(`${BASE_URL}/api/groups/${groupId}`)
             .then((response) => response.json())
-            .then(data => setGroup((prev) => data))
+            .then(data => setGroup(() => data))
             .catch(error => error instanceof Error && setError(error.message));
     }, []);
 

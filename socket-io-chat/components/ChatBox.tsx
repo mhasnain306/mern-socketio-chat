@@ -1,9 +1,4 @@
-import React, {
-  FormEvent,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import useMessages from "../hooks/useMessages";
 import useUsers, { UserData } from "../hooks/useUsers";
 import socket from "../src/socket";
@@ -27,8 +22,7 @@ const ChatBox = ({
   onMessageDelivered,
 }: Props) => {
   const { saveMessage, messageData } = useMessages();
-  const { saveUserInteraction, isUserInteractionUpdated } =
-    useUsers();
+  const { saveUserInteraction } = useUsers();
   const [message, setMessage] = useState("");
   const [isUserOnline, setUserOnline] = useState(false);
   const chatBoxRef = useRef<HTMLDivElement>(null);

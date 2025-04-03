@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import useUsers, { UserData } from "../hooks/useUsers";
+import { useEffect, useState } from "react";
 import useGroups, { GroupType } from "../hooks/useGroups";
+import useUsers, { UserData } from "../hooks/useUsers";
 
 interface Props {
   userId: string;
