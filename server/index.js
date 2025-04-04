@@ -35,6 +35,7 @@ io.on("connection", (socket) => {
   console.log("A New user: ", socket.id);
 
   // socket.emit("connect", socket.id);
+  //y
 
   socket.on("chat message", (message, channel) => {
     const newMessage = `${socket.id}: ${message}`;
